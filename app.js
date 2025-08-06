@@ -1,38 +1,32 @@
 // variables
-let numeroSecreto;
-let numeroDeUsuario = 0;
-let intentos = 1;
+let SecretNumber = Math.floor(Math.random() * 10) + 1;
+let intentos = 0;
+let userNum = 0;
 let palabraVeces = "intento";
 
-// lógica
-numeroSecreto = Math.floor(Math.random() * 10) + 1;
-console.log(`Numero secreto: ${numeroSecreto}`);
+console.log(`Número secreto: ${SecretNumber}`);
 
-numeroDeUsuario = prompt("Digite un número entre 1 e 10");
-console.log(`Numero de usuario ${numeroDeUsuario}`);
+// primer intento
+userNum = parseInt(prompt("Digite un número entre 1 y 10"));
 
-while (numeroDeUsuario != numeroSecreto) {
+while (userNum !== SecretNumber) {
+    if (userNum < SecretNumber) {
+        alert(`El número secreto es mayor que ${userNum}`);
+    } else {
+        alert(`El número secreto es menor que ${userNum}`);
+    }
 
-    if (numeroDeUsuario == numeroSecreto) {
-        alert(`Felicidades, has acertado el número secreto en ${intentos} ${palabraVeces}`);
+    intentos++;
+    palabraVeces = "intentos";
+
+    if (intentos >= 3) {
+        alert("Lo siento, has agotado tus intentos. El número secreto era " + SecretNumber);
         break;
     }
-    else if (numeroDeUsuario < numeroSecreto) {
-        alert("El número secreto es mayor que " + numeroDeUsuario);
-        numeroDeUsuario = prompt("Inténtalo de nuevo, te quedan " + (3 - intentos) + " intentos");
-        intentos++;
-        palabraVeces = "intentos";
 
-    }
-    else if (numeroDeUsuario > numeroSecreto) {
-        alert("El número secreto es menor que " + numeroDeUsuario);
-        numeroDeUsuario = prompt("Inténtalo de nuevo, te quedan " + (3 - intentos) + " intentos");
-        intentos++;
-        palabraVeces = "intentos";
+    userNum = parseInt(prompt("Inténtalo de nuevo, te quedan " + (3 - intentos) + " intentos"));
+}
 
-    }
-    else  (intentos == 3); {
-        alert(`Haz llegado al numero maximo de intentos, el numero secreto era ${numeroSecreto}`);
-        break;
-    }
+if (userNum === SecretNumber) {
+    alert(`¡Felicidades! Has acertado el número secreto en ${intentos} ${palabraVeces}.`);
 }
